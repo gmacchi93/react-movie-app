@@ -6,4 +6,16 @@
   body {
     @apply bg-gray-100
   }
+
+  .custom-tab button:first-child {
+    @apply rounded-l-full
+  }
+
+  .custom-tab button:last-child {
+    @apply rounded-r-full
+  }
+
+  [role="tab"][aria-selected="true"] {
+    @apply bg-blue-500 text-white transition-all
+  }
 }

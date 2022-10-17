@@ -5,31 +5,23 @@ import MovieReleaseDate from "./MovieReleaseDate";
 import MovieGenres from "./MovieGenres";
 import MovieTitle from "./MovieTitle";
 import MoviePoster from "./MoviePoster";
+import { Movie } from "../../types/TheMovieDB";
 
-type Props = {};
+type Props = {
+  movie: Movie;
+};
 
-const MovieCard = (props: Props) => {
+const MovieCard = ({ movie }: Props) => {
   return (
-    <div className="flex flex-col min-w-max">
-      <MoviePoster
-        posterPath="/eed4qNf174pcT65it1PBbaTTL3x.jpg"
-        title="La huerfana"
-      />
+    <li className="flex flex-col max-w-48 min-w-48">
+      <MoviePoster posterPath={movie.poster_path} title={movie.title} />
       <div className="p-2">
-        <MovieTitle title="La huerfana" />
-        <div className="flex flex-row gap-4">
-          <MovieRating rating={3.5} />
-          <MovieDuration duration={139} />
-        </div>
-        <MovieGenres
-          genres={[
-            { id: 1, name: "Drama" },
-            { id: 2, name: "Action" },
-          ]}
-        />
-        <MovieReleaseDate releaseDate={new Date("2022-01-01")} />
+        <MovieTitle title={movie.title} />
+        <MovieRating rating={movie.vote_average} />
+        <MovieGenres genresIds={movie.genre_ids.slice(0, 2)} />
+        <MovieReleaseDate releaseDate={movie.release_date} />
       </div>
-    </div>
+    </li>
   );
 };
 

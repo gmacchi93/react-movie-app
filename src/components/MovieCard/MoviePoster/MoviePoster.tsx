@@ -7,12 +7,17 @@ type Props = {
 
 const MoviePoster = ({ posterPath, title }: Props) => {
   return (
-    <img
-      className="rounded-md w-48"
-      src={`https://image.tmdb.org/t/p/w500${posterPath}`}
-      alt={title}
-      loading="lazy"
-    />
+    <a
+      href="#"
+      className="rounded-md overflow-hidden shadow-md hover:-mt-4 focus:-mt-4 focus:outline-blue-500 transition-all"
+    >
+      <img
+        className="w-48"
+        src={`https://image.tmdb.org/t/p/w500${posterPath}`}
+        alt={title}
+        loading="lazy"
+      />
+    </a>
   );
 };
 

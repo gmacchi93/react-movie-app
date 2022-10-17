@@ -1,15 +1,14 @@
 import React from "react";
+import MovieGenre from "./MovieGenre";
 
 type Props = {
-  genres: { id: number; name: string }[];
+  genresIds: number[];
 };
 
-const MovieGenres = ({ genres }: Props) => {
+const MovieGenres = ({ genresIds }: Props) => {
   return (
     <ul className="flex flex-row gap-1" aria-label="Genres">
-      {genres.map(({ name }) => (
-        <li className="text-sm first:before:content-none before:content-['∙'] before:mr-1">{name}</li>
-      ))}
+      {genresIds.map((id: number) => <MovieGenre key={`genre-${id}`} id={id} />)}
     </ul>
   );
 };

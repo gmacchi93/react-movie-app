@@ -8,6 +8,12 @@ module.exports = {
       animation: {
         'spin-slow': 'spin 10s linear infinite',
       },
+      maxWidth: {
+        '48': '12rem'
+      },
+      minWidth: {
+        '48': '12rem'
+      }
     },
   },
   plugins: [],

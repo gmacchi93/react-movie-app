@@ -1,29 +1,22 @@
-import React from "react";
-import MovieCard from "../MovieCard";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { fetchGenres } from "../../actions/MovieActions";
+import Trending from "../Trending";
+import Upcoming from "../Upcoming/Upcoming";
 
 type Props = {};
 
 const Main = (props: Props) => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchGenres());
+  }, [dispatch]);
+
   return (
-    <main>
-      <section className="container mx-auto py-5 ">
-        <h2 className="text-xl font-bold">Trending Movies</h2>
-        <div className="flex flex-row gap-6 py-5 overflow-x-auto">
-          <MovieCard />
-          <MovieCard />
-          <MovieCard />
-          <MovieCard />
-          <MovieCard />
-          <MovieCard />
-          <MovieCard />
-          <MovieCard />
-          <MovieCard />
-          <MovieCard />
-          <MovieCard />
-          <MovieCard />
-          <MovieCard />
-        </div>
-      </section>
+    <main className="px-5 sm:px-0 ">
+      <Trending />
+      <Upcoming />
     </main>
   );
 };
