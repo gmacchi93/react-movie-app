@@ -3,12 +3,13 @@ import React from "react";
 type Props = {
   posterPath: string;
   title: string;
+  id: number;
 };
 
-const MoviePoster = ({ posterPath, title }: Props) => {
+const MoviePoster = ({ posterPath, title, id }: Props) => {
   return (
     <a
-      href="#"
+      href={`/${id}`}
       className="rounded-md overflow-hidden shadow-md hover:-mt-4 focus:-mt-4 focus:outline-blue-500 transition-all"
     >
       <img

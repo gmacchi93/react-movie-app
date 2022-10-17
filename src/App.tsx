@@ -1,14 +1,20 @@
 import React from "react";
-import "./App.css";
-import Header from "./components/Header";
-import Main from "./components/Main";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+} from "react-router-dom";
+import Home from "./pages/Home";
+import MovieDetail from "./pages/MovieDetail";
 
 function App() {
   return (
-    <>
-      <Header />
-      <Main />
-    </>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/:movieId" element={<MovieDetail />} />
+      </Routes>
+    </Router>
   );
 }
 

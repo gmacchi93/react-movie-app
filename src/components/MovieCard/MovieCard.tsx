@@ -14,7 +14,7 @@ type Props = {
 const MovieCard = ({ movie }: Props) => {
   return (
     <li className="flex flex-col max-w-48 min-w-48">
-      <MoviePoster posterPath={movie.poster_path} title={movie.title} />
+      <MoviePoster posterPath={movie.poster_path} title={movie.title} id={movie.id} />
       <div className="p-2">
         <MovieTitle title={movie.title} />
         <MovieRating rating={movie.vote_average} />
