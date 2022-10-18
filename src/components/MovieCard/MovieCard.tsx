@@ -1,6 +1,5 @@
 import React from "react";
 import MovieRating from "./MovieRating";
-import MovieDuration from "./MovieDuration";
 import MovieReleaseDate from "./MovieReleaseDate";
 import MovieGenres from "./MovieGenres";
 import MovieTitle from "./MovieTitle";

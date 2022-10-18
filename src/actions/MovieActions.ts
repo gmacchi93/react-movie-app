@@ -1,4 +1,4 @@
-import { DAY, GenresList, MovieList, TimeWindow } from "../types/TheMovieDB";
+import { Credits, DAY, GenresList, MovieDetail, MovieList, TimeWindow, WatchProviders } from "../types/TheMovieDB";
 import { movieActionTypes } from "./ActionTypes";
 
 // FETCH_GENRES
@@ -58,3 +58,84 @@ export const fetchUpcomingSuccess = (upcoming: MovieList) => ({
 export const fetchUpcoming = () => ({
   type: movieActionTypes.FETCH_UPCOMING
 });
+
+// FETCH_DETAIL
+export const fetchDetailRequest = () => ({
+  type: movieActionTypes.FETCH_DETAIL_REQUEST,
+});
+
+export const fetchDetailError = (error: string) => ({
+  type: movieActionTypes.FETCH_DETAIL_ERROR,
+  error,
+});
+
+export const fetchDetailSuccess = (detail: MovieDetail) => ({
+  type: movieActionTypes.FETCH_DETAIL_SUCCESS,
+  detail,
+});
+
+export const fetchDetail = (id:string) => ({
+  type: movieActionTypes.FETCH_DETAIL,
+  id
+});
+
+// FETCH_WATCH_PROVIDERS
+export const fetchWatchProvidersRequest = () => ({
+  type: movieActionTypes.FETCH_WATCH_PROVIDERS_REQUEST,
+});
+
+export const fetchWatchProvidersError = (error: string) => ({
+  type: movieActionTypes.FETCH_WATCH_PROVIDERS_ERROR,
+  error,
+});
+
+export const fetchWatchProvidersSuccess = (data: WatchProviders) => ({
+  type: movieActionTypes.FETCH_WATCH_PROVIDERS_SUCCESS,
+  data,
+});
+
+export const fetchWatchProviders = (id:string) => ({
+  type: movieActionTypes.FETCH_WATCH_PROVIDERS,
+  id
+});
+
+// FETCH_CREDITS
+export const fetchCreditsRequest = () => ({
+  type: movieActionTypes.FETCH_CREDITS_REQUEST,
+});
+
+export const fetchCreditsError = (error: string) => ({
+  type: movieActionTypes.FETCH_CREDITS_ERROR,
+  error,
+});
+
+export const fetchCreditsSuccess = (data: Credits) => ({
+  type: movieActionTypes.FETCH_CREDITS_SUCCESS,
+  data,
+});
+
+export const fetchCredits = (id:string) => ({
+  type: movieActionTypes.FETCH_CREDITS,
+  id
+});
+
+// FETCH_SIMILAR_MOVIES
+export const fetchSimilarMoviesRequest = () => ({
+  type: movieActionTypes.FETCH_SIMILAR_MOVIES_REQUEST,
+});
+
+export const fetchSimilarMoviesError = (error: string) => ({
+  type: movieActionTypes.FETCH_SIMILAR_MOVIES_ERROR,
+  error,
+});
+
+export const fetchSimilarMoviesSuccess = (data: MovieList) => ({
+  type: movieActionTypes.FETCH_SIMILAR_MOVIES_SUCCESS,
+  data,
+});
+
+export const fetchSimilarMovies = (id:string) => ({
+  type: movieActionTypes.FETCH_SIMILAR_MOVIES,
+  id
+});
+

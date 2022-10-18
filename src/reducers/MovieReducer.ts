@@ -1,6 +1,6 @@
 import { AnyAction } from "redux";
 import { movieActionTypes } from "../actions/ActionTypes";
-import { Movie } from "../types/TheMovieDB";
+import { Credits, Department, Movie, MovieList, WatchProviders } from "../types/TheMovieDB";
 import createReducer from "../utils/CreateReducer";
 
 const MOVIES_INITIAL_STATE = {
@@ -14,21 +14,25 @@ const initialState = {
   genres: [],
   trending: MOVIES_INITIAL_STATE,
   upcoming: MOVIES_INITIAL_STATE,
+  detail: null,
 };
 
-const resultsMapping = (results:Movie[]) => {
+const movieMapping = (movie: Movie) => {
+  const release_date = movie.release_date ? new Date(movie.release_date) : null;
+  const vote_average = (movie.vote_average / 2).toFixed(1);
+  return {
+    ...movie,
+    release_date,
+    vote_average,
+  };
+};
+
+const resultsMapping = (results: Movie[]) => {
   return results.map((movie: Movie) => {
-    const release_date = movie.release_date
-      ? new Date(movie.release_date)
-      : null;
-    const vote_average = (movie.vote_average / 2).toFixed(1);
-    return {
-      ...movie,
-      release_date,
-      vote_average,
-    };
+    const movieMapped = movieMapping(movie);
+    return movieMapped;
   });
-}
+};
 
 const onfetchGenresSuccess = (state: any, action: AnyAction) => {
   const {
@@ -67,10 +71,64 @@ const onfetchUpcomingSuccess = (state: any, action: AnyAction) => {
   };
 };
 
+const onfetchDetailSuccess = (state: any, action: AnyAction) => {
+  const { detail } = action;
+  const movie = movieMapping(detail);
+
+  return {
+    ...state,
+    detail: {
+      ...state.detail,
+      movie,
+    },
+  };
+};
+
+const onfetchWatchProvidersSuccess = (state: any, action: AnyAction) => {
+  const data: WatchProviders = action.data;
+
+  return {
+    ...state,
+    detail: {
+      ...state.detail,
+      watchProviders: data.results?.US,
+    },
+  };
+};
+
+const onfetchCreditsSuccess = (state: any, action: AnyAction) => {
+  const data: Credits = action.data;
+
+  return {
+    ...state,
+    detail: {
+      ...state.detail,
+      cast: data.cast.filter(person => person.known_for_department === Department.Acting).slice(0, 5),
+    },
+  };
+};
+
+const onfetchSimilarMovies = (state: any, action: AnyAction) => {
+  const data: MovieList = action.data;
+  const results = resultsMapping(data.results);
+
+  return {
+    ...state,
+    detail: {
+      ...state.detail,
+      similarMovies: results
+    },
+  };
+};
+
 const handlers = {
+  [movieActionTypes.FETCH_GENRES_SUCCESS]: onfetchGenresSuccess,
   [movieActionTypes.FETCH_TRENDING_SUCCESS]: onfetchTrendingSuccess,
   [movieActionTypes.FETCH_UPCOMING_SUCCESS]: onfetchUpcomingSuccess,
-  [movieActionTypes.FETCH_GENRES_SUCCESS]: onfetchGenresSuccess,
+  [movieActionTypes.FETCH_DETAIL_SUCCESS]: onfetchDetailSuccess,
+  [movieActionTypes.FETCH_WATCH_PROVIDERS_SUCCESS]: onfetchWatchProvidersSuccess,
+  [movieActionTypes.FETCH_CREDITS_SUCCESS]: onfetchCreditsSuccess,
+  [movieActionTypes.FETCH_SIMILAR_MOVIES_SUCCESS]: onfetchSimilarMovies,
 };
 
 export default createReducer(initialState, handlers);

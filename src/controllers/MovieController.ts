@@ -14,6 +14,22 @@ class MovieController {
     const result = await HttpClient.get("/movie/upcoming");
     return result.data;
   };
+  fetchDetail = async (id: string) => {
+    const result = await HttpClient.get(`/movie/${id}`);
+    return result.data;
+  };
+  fetchWatchProviders = async (id: string) => {
+    const result = await HttpClient.get(`/movie/${id}/watch/providers`);
+    return result.data;
+  };
+  fetchCredits = async (id: string) => {
+    const result = await HttpClient.get(`/movie/${id}/credits`);
+    return result.data;
+  };
+  fetchSimilarMovies = async (id: string) => {
+    const result = await HttpClient.get(`/movie/${id}/similar`);
+    return result.data;
+  };
 }
 
 export default new MovieController();

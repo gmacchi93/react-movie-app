@@ -11,9 +11,21 @@ import {
   fetchUpcomingRequest,
   fetchUpcomingSuccess,
   fetchUpcomingError,
+  fetchDetailRequest,
+  fetchDetailSuccess,
+  fetchDetailError,
+  fetchWatchProvidersRequest,
+  fetchWatchProvidersSuccess,
+  fetchWatchProvidersError,
+  fetchCreditsRequest,
+  fetchCreditsSuccess,
+  fetchCreditsError,
+  fetchSimilarMoviesRequest,
+  fetchSimilarMoviesSuccess,
+  fetchSimilarMoviesError,
 } from "../actions/MovieActions";
 import MovieController from "../controllers/MovieController";
-import { GenresList, MovieList } from "../types/TheMovieDB";
+import { Credits, GenresList, MovieDetail, MovieList, WatchProviders } from "../types/TheMovieDB";
 
 function* onfetchGenres(action: AnyAction) {
   try {
@@ -49,10 +61,58 @@ function* onfetchUpcoming(action: AnyAction) {
   }
 }
 
+function* onfetchDetail(action: AnyAction) {
+  const { id } = action;
+  try {
+    yield put(fetchDetailRequest());
+    const data: MovieDetail = yield call(MovieController.fetchDetail, id);
+    yield put(fetchDetailSuccess(data));
+  } catch (error: any) {
+    yield put(fetchDetailError(error));
+  }
+}
+
+function* onfetchWatchProviders(action: AnyAction) {
+  const { id } = action;
+  try {
+    yield put(fetchWatchProvidersRequest());
+    const data: WatchProviders = yield call(MovieController.fetchWatchProviders, id);
+    yield put(fetchWatchProvidersSuccess(data));
+  } catch (error: any) {
+    yield put(fetchWatchProvidersError(error));
+  }
+}
+
+function* onfetchCredits(action: AnyAction) {
+  const { id } = action;
+  try {
+    yield put(fetchCreditsRequest());
+    const data: Credits = yield call(MovieController.fetchCredits, id);
+    yield put(fetchCreditsSuccess(data));
+  } catch (error: any) {
+    yield put(fetchCreditsError(error));
+  }
+}
+
+function* onfetchSimilarMovies(action: AnyAction) {
+  const { id } = action;
+  try {
+    yield put(fetchSimilarMoviesRequest());
+    const data: MovieList = yield call(MovieController.fetchSimilarMovies, id);
+    yield put(fetchSimilarMoviesSuccess(data));
+  } catch (error: any) {
+    yield put(fetchSimilarMoviesError(error));
+  }
+}
+
 function* MovieSaga() {
+  yield takeLatest(movieActionTypes.FETCH_GENRES, onfetchGenres);
   yield takeLatest(movieActionTypes.FETCH_TRENDING, onfetchTrending);
   yield takeLatest(movieActionTypes.FETCH_UPCOMING, onfetchUpcoming);
-  yield takeLatest(movieActionTypes.FETCH_GENRES, onfetchGenres);
+  yield takeLatest(movieActionTypes.FETCH_DETAIL, onfetchDetail);
+  yield takeLatest(movieActionTypes.FETCH_WATCH_PROVIDERS, onfetchWatchProviders);
+  yield takeLatest(movieActionTypes.FETCH_CREDITS, onfetchCredits);
+  yield takeLatest(movieActionTypes.FETCH_SIMILAR_MOVIES, onfetchSimilarMovies);
 }
 
 export default MovieSaga;
