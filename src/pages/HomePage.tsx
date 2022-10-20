@@ -6,7 +6,7 @@ import Upcoming from "../components/Upcoming/Upcoming";
 
 type Props = {};
 
-const Home = (props: Props) => {
+const HomePage = (props: Props) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -21,4 +21,4 @@ const Home = (props: Props) => {
   );
 };
 
-export default Home;
+export default HomePage;

@@ -13,8 +13,6 @@ import GenericErrorMessage from "../components/common/GenericErrorMessage";
 import CastItem from "../components/Detail/CastItem";
 import DetailLoader from "../components/Detail/DetailLoader/DetailLoader";
 import WatchProvidersList from "../components/Detail/WatchProvidersList/WatchProvidersList";
-import Footer from "../components/Footer";
-import Header from "../components/Header";
 import MovieCard from "../components/MovieCard";
 import MovieCardLoader from "../components/MovieCard/MovieCardLoader";
 import MovieDuration from "../components/MovieCard/MovieDuration";

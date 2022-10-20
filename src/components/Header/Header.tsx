@@ -1,9 +1,24 @@
-import React from "react";
+import React, { ChangeEvent, FormEvent, useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../svg/logo.svg";
+import { useNavigate } from "react-router-dom";
 type Props = {};
 
 const Header = (props: Props) => {
+  const navigate = useNavigate();
+  const [name, setName] = useState("");
+  const onSubmit = (event: FormEvent) => {
+    navigate(`/search?name=${name}`);
+    event.preventDefault();
+    event.stopPropagation();
+  };
+
+  const handleChange = ({
+    target: { value },
+  }: ChangeEvent<HTMLInputElement>) => {
+    setName(value);
+  };
+  
   return (
     <header className="bg-blue-500 shadow-md">
       <div className="container m-auto">
@@ -17,7 +32,12 @@ const Header = (props: Props) => {
             />
             <h1 className="text-2xl text-white">React Movie App</h1>
           </Link>
-          <form method="get" action="search" className="flex flex-row w-full sm:w-auto md:w-1/2 lg:w-1/2 xl:w-3/5">
+          <form
+            method="get"
+            action="search"
+            className="flex flex-row w-full sm:w-auto md:w-1/2 lg:w-1/2 xl:w-3/5"
+            onSubmit={onSubmit}
+          >
             <label htmlFor="search" className="hidden">
               Search some movie
             </label>
@@ -27,8 +47,15 @@ const Header = (props: Props) => {
               placeholder="Search any movie..."
               id="search"
               name="name"
+              value={name}
+              onChange={handleChange}
             />
-            <input className="bg-gray-200 text-gray-600 p-6" type="submit" value="Search" aria-label="Search" />
+            <input
+              className="bg-gray-200 text-gray-600 p-6"
+              type="submit"
+              value="Search"
+              aria-label="Search"
+            />
           </form>
         </div>
       </div>

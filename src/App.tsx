@@ -6,16 +6,18 @@ import {
 } from "react-router-dom";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
-import Home from "./pages/Home";
-import MovieDetail from "./pages/MovieDetail";
+import HomePage from "./pages/HomePage";
+import MovieDetailPage from "./pages/MovieDetailPage";
+import SearchPage from "./pages/SearchPage";
 
 function App() {
   return (
     <Router>
       <Header />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/:movieId" element={<MovieDetail />} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/:movieId" element={<MovieDetailPage />} />
+        <Route path="/search" element={<SearchPage />} />
       </Routes>
       <Footer />
     </Router>
