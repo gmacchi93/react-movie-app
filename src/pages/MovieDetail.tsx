@@ -49,7 +49,6 @@ const MovieDetailPage = () => {
 
   return (
     <>
-      <Header />
       <main>
         <section
           className="bg-no-repeat bg-cover bg-center"
@@ -70,6 +69,8 @@ const MovieDetailPage = () => {
                   posterPath={movie?.poster_path}
                   title={movie?.title}
                   animated={false}
+                  width={64}
+                  height={96}
                 />
                 <div className="flex flex-col gap-3">
                   <h2 className="text-3xl">{movie?.title}</h2>
@@ -129,7 +130,6 @@ const MovieDetailPage = () => {
           </div>
         </section>
       </main>
-      <Footer />
     </>
   );
 };

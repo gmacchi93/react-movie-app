@@ -1,18 +1,24 @@
-import React from 'react'
-import Footer from '../components/Footer'
-import Header from '../components/Header'
-import Main from '../components/Main'
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { fetchGenres } from "../actions/MovieActions";
+import Trending from "../components/Trending";
+import Upcoming from "../components/Upcoming/Upcoming";
 
-type Props = {}
+type Props = {};
 
 const Home = (props: Props) => {
-  return (
-    <>
-      <Header />
-      <Main />
-      <Footer />
-    </>
-  )
-}
+  const dispatch = useDispatch();
 
-export default Home
+  useEffect(() => {
+    dispatch(fetchGenres());
+  }, [dispatch]);
+
+  return (
+    <main className="px-5 sm:px-0 py-5">
+      <Trending />
+      <Upcoming />
+    </main>
+  );
+};
+
+export default Home;

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { classNames } from "../../../utils/Class";
 
 type Props = {
@@ -6,24 +7,26 @@ type Props = {
   title: string;
   id: number;
   animated?: boolean;
+  width?: number;
+  height?: number;
 };
 
-const MoviePoster = ({ posterPath, title, id, animated = true }: Props) => {
+const MoviePoster = ({ posterPath, title, id, animated = true, width = 48, height = 72 }: Props) => {
   return (
-    <a
-      href={`/${id}`}
+    <Link
+      to={`/${id}`}
       className={classNames(
-        "w-48 min-w-48 rounded-md overflow-hidden shadow-md focus:-mt-4 focus:outline-blue-500",
+        `flex flex-shrink-0 w-${width} min-w-${width} rounded-md overflow-hidden shadow-md focus:-mt-4 focus:outline-blue-500`,
         animated ? "hover:-mt-4 transition-all" : ""
       )}
     >
       <img
-        className="w-48 h-72"
+        className={`w-${width} h-${height}`}
         src={`https://image.tmdb.org/t/p/w500${posterPath}`}
         alt={title}
         loading="lazy"
       />
-    </a>
+    </Link>
   );
 };
 
