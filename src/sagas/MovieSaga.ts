@@ -23,6 +23,9 @@ import {
   fetchSimilarMoviesRequest,
   fetchSimilarMoviesSuccess,
   fetchSimilarMoviesError,
+  searchMovieRequest,
+  searchMovieSuccess,
+  searchMovieError,
 } from "../actions/MovieActions";
 import MovieController from "../controllers/MovieController";
 import { Credits, GenresList, MovieDetail, MovieList, WatchProviders } from "../types/TheMovieDB";
@@ -105,6 +108,17 @@ function* onfetchSimilarMovies(action: AnyAction) {
   }
 }
 
+function* onSearchMovie(action: AnyAction) {
+  const { query, page = 1 } = action;
+  try {
+    yield put(searchMovieRequest());
+    const data: MovieList = yield call(MovieController.searchMovie, query, page);
+    yield put(searchMovieSuccess(data));
+  } catch (error: any) {
+    yield put(searchMovieError(error));
+  }
+}
+
 function* MovieSaga() {
   yield takeLatest(movieActionTypes.FETCH_GENRES, onfetchGenres);
   yield takeLatest(movieActionTypes.FETCH_TRENDING, onfetchTrending);
@@ -113,6 +127,7 @@ function* MovieSaga() {
   yield takeLatest(movieActionTypes.FETCH_WATCH_PROVIDERS, onfetchWatchProviders);
   yield takeLatest(movieActionTypes.FETCH_CREDITS, onfetchCredits);
   yield takeLatest(movieActionTypes.FETCH_SIMILAR_MOVIES, onfetchSimilarMovies);
+  yield takeLatest(movieActionTypes.SEARCH_MOVIE, onSearchMovie);
 }
 
 export default MovieSaga;

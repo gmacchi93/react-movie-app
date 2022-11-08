@@ -71,7 +71,7 @@ const MovieDetailPage = () => {
                   height={96}
                 />
                 <div className="flex flex-col gap-3">
-                  <h2 className="text-3xl">{movie?.title}</h2>
+                  <h2 className="text-5xl font-semibold">{movie?.title}</h2>
                   <p className="text-lg">{movie?.tagline}</p>
                   <div className="flex gap-4">
                     <MovieRating rating={movie?.vote_average} />

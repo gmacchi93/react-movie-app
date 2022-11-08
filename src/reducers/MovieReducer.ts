@@ -121,6 +121,20 @@ const onfetchSimilarMovies = (state: any, action: AnyAction) => {
   };
 };
 
+const onSearchMovie = (state: any, action: AnyAction) => {
+  const data: MovieList = action.data;
+  const {results:searchResults, ...other} = data;
+  const results = resultsMapping(searchResults);
+
+  return {
+    ...state,
+    searchResults: {
+      ...other,
+      results: other.page > 1 ? [...state.searchResults.results, ...results] : results,
+    },
+  };
+};
+
 const handlers = {
   [movieActionTypes.FETCH_GENRES_SUCCESS]: onfetchGenresSuccess,
   [movieActionTypes.FETCH_TRENDING_SUCCESS]: onfetchTrendingSuccess,
@@ -129,6 +143,7 @@ const handlers = {
   [movieActionTypes.FETCH_WATCH_PROVIDERS_SUCCESS]: onfetchWatchProvidersSuccess,
   [movieActionTypes.FETCH_CREDITS_SUCCESS]: onfetchCreditsSuccess,
   [movieActionTypes.FETCH_SIMILAR_MOVIES_SUCCESS]: onfetchSimilarMovies,
+  [movieActionTypes.SEARCH_MOVIE_SUCCESS]: onSearchMovie,
 };
 
 export default createReducer(initialState, handlers);

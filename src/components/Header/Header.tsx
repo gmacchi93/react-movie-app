@@ -1,10 +1,11 @@
-import React, { ChangeEvent, FormEvent, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { Link, useSearchParams } from "react-router-dom";
 import logo from "../svg/logo.svg";
 import { useNavigate } from "react-router-dom";
 type Props = {};
 
 const Header = (props: Props) => {
+  let [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const [name, setName] = useState("");
   const onSubmit = (event: FormEvent) => {
@@ -18,6 +19,11 @@ const Header = (props: Props) => {
   }: ChangeEvent<HTMLInputElement>) => {
     setName(value);
   };
+
+  useEffect(() => {
+    setName(searchParams.get('name') || "")
+  }, [searchParams])
+  
   
   return (
     <header className="bg-blue-500 shadow-md">

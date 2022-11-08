@@ -139,3 +139,24 @@ export const fetchSimilarMovies = (id:string) => ({
   id
 });
 
+// SEARCH_MOVIE
+export const searchMovieRequest = () => ({
+  type: movieActionTypes.SEARCH_MOVIE_REQUEST,
+});
+
+export const searchMovieError = (error: string) => ({
+  type: movieActionTypes.SEARCH_MOVIE_ERROR,
+  error,
+});
+
+export const searchMovieSuccess = (data: MovieList) => ({
+  type: movieActionTypes.SEARCH_MOVIE_SUCCESS,
+  data,
+});
+
+export const searchMovie = (query:string, page?: number) => ({
+  type: movieActionTypes.SEARCH_MOVIE,
+  query,
+  page
+});
+

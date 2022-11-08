@@ -30,6 +30,10 @@ class MovieController {
     const result = await HttpClient.get(`/movie/${id}/similar`);
     return result.data;
   };
+  searchMovie = async (query: string, page: number) => {
+    const result = await HttpClient.get('/search/movie', { params: { query, page }});
+    return result.data;
+  };
 }
 
 export default new MovieController();
