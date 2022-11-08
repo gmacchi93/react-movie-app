@@ -1,6 +1,23 @@
-# Getting Started with Create React App
+# Simple React Movie app
+
+
+
+https://user-images.githubusercontent.com/9690753/200607422-2d5feb24-6375-47a4-8a9e-d7bc911761c2.mp4
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+The project is configured for typescript, uses redux-saga for state management, tailwind as a CSS library, and well-defined semantic HTML.
+
+## Getting started
+
+Create an account on themoviedb.org, follow the instructions here https://www.themoviedb.org/documentation/api
+
+Generate an api key.
+
+Rename `.env.example` to `.env` and replace the value of `REACT_APP_THE_MOVIEDB_API_KEY`
+
+That is all
 
 ## Available Scripts
 
